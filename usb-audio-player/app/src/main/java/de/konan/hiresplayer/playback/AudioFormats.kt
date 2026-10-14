@@ -1,7 +1,9 @@
 package de.konan.hiresplayer.playback
 
 import android.media.AudioFormat
+import androidx.annotation.OptIn
 import androidx.media3.common.C
+import androidx.media3.common.util.UnstableApi
 
 /** Vereinheitlicht Media3- (C.ENCODING_*) und Android-Encodings (AudioFormat.ENCODING_*). */
 enum class PcmKind(val label: String, val rank: Int) {
@@ -12,6 +14,7 @@ enum class PcmKind(val label: String, val rank: Int) {
     OTHER("unbekannt", 0),
 }
 
+@OptIn(UnstableApi::class)
 fun pcmKindOf(encoding: Int): PcmKind {
     if (encoding == C.ENCODING_PCM_16BIT || encoding == AudioFormat.ENCODING_PCM_16BIT) return PcmKind.I16
     if (encoding == C.ENCODING_PCM_FLOAT || encoding == AudioFormat.ENCODING_PCM_FLOAT) return PcmKind.FLOAT
