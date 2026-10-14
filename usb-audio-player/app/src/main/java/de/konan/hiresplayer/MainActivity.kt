@@ -1,6 +1,7 @@
 package de.konan.hiresplayer
 
 import android.content.ComponentName
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,11 +19,21 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        if (savedInstanceState == null) handleTidalRedirect(intent)
         setContent {
             HiResTheme {
                 AppRoot()
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleTidalRedirect(intent)
+    }
+
+    private fun handleTidalRedirect(intent: Intent?) {
+        (application as HiResApp).tidal.handleRedirect(intent?.data)
     }
 
     override fun onStart() {
