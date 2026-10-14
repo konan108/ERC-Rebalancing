@@ -21,3 +21,9 @@ PRICES_SHEET_NAME = "Prices_5Y"
 OUTPUT_SHEET_NAME = "Weights"
 SLEEVE_SHARE      = 0.25
 WINDOW_MONTHS     = 60
+
+---
+
+## Weiteres Projekt in diesem Repo
+
+- [`usb-audio-player/`](usb-audio-player/README.md) – HiRes USB Player: Android-Musikplayer mit Bit-Perfect-Ausgabe für USB-DACs und parametrischem EQ.
