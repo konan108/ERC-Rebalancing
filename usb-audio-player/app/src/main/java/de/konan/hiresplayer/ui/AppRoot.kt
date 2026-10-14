@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.Equalizer
 import androidx.compose.material.icons.filled.LibraryMusic
 import androidx.compose.material.icons.filled.Pause
@@ -51,7 +50,6 @@ import de.konan.hiresplayer.playback.PlaybackEngine
 
 private enum class Tab(val label: String, val icon: ImageVector) {
     LIBRARY("Bibliothek", Icons.Filled.LibraryMusic),
-    TIDAL("TIDAL", Icons.Filled.Cloud),
     PLAYER("Wiedergabe", Icons.Filled.PlayCircle),
     OUTPUT("Ausgabe", Icons.Filled.Usb),
     EQ("EQ", Icons.Filled.Equalizer),
@@ -98,7 +96,7 @@ fun AppRoot(vm: MainViewModel = viewModel()) {
                             selected = tab == t,
                             onClick = { tab = t },
                             icon = { Icon(t.icon, contentDescription = t.label) },
-                            label = { Text(t.label, maxLines = 1) },
+                            label = { Text(t.label) },
                         )
                     }
                 }
@@ -110,7 +108,6 @@ fun AppRoot(vm: MainViewModel = viewModel()) {
             .padding(padding)
         when (tab) {
             Tab.LIBRARY -> LibraryScreen(vm, engine, hasPermission, requestPermissions, modifier)
-            Tab.TIDAL -> TidalScreen(modifier)
             Tab.PLAYER -> NowPlayingScreen(engine, modifier)
             Tab.OUTPUT -> OutputScreen(engine, modifier)
             Tab.EQ -> EqScreen(engine, onSwitchToStandard = { tab = Tab.OUTPUT }, modifier = modifier)
