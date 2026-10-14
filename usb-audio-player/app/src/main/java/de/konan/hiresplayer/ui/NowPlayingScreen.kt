@@ -48,7 +48,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -121,8 +120,10 @@ fun NowPlayingScreen(engine: PlaybackEngine, modifier: Modifier = Modifier) {
 @Composable
 private fun Artwork(mediaId: String?, artworkUri: Uri?) {
     val context = LocalContext.current
-    val bitmap by produceState<Bitmap?>(null, mediaId) {
-        val loaded = withContext(Dispatchers.IO) {
+    var bitmap by remember { mutableStateOf<Bitmap?>(null) }
+    LaunchedEffect(mediaId) {
+        bitmap = null
+        bitmap = withContext(Dispatchers.IO) {
             runCatching {
                 val id = mediaId?.toLongOrNull()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && id != null) {
@@ -133,7 +134,6 @@ private fun Artwork(mediaId: String?, artworkUri: Uri?) {
                 }
             }.getOrNull()
         }
-        value = loaded
     }
     Box(
         Modifier
