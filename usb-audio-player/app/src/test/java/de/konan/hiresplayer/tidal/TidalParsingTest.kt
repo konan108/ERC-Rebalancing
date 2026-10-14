@@ -9,7 +9,7 @@ class TidalParsingTest {
     @Test
     fun pkceChallengeMatchesRfc7636Vector() {
         assertEquals(
-            "E9Melhoa2OwvFrEMTJguCHaoeK1HS-z_jW-SKFuJ0Cs",
+            "E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM",
             Pkce.challenge("dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"),
         )
     }
