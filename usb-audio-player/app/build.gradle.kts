@@ -41,12 +41,6 @@ android {
     buildFeatures {
         compose = true
     }
-
-    lint {
-        // Vollständiger Bericht im CI-Log.
-        textReport = true
-        textOutput = file("stdout")
-    }
 }
 
 dependencies {

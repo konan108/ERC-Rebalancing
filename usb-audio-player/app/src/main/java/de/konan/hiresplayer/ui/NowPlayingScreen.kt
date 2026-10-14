@@ -122,7 +122,7 @@ fun NowPlayingScreen(engine: PlaybackEngine, modifier: Modifier = Modifier) {
 private fun Artwork(mediaId: String?, artworkUri: Uri?) {
     val context = LocalContext.current
     val bitmap by produceState<Bitmap?>(null, mediaId) {
-        value = withContext(Dispatchers.IO) {
+        val loaded = withContext(Dispatchers.IO) {
             runCatching {
                 val id = mediaId?.toLongOrNull()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && id != null) {
@@ -133,6 +133,7 @@ private fun Artwork(mediaId: String?, artworkUri: Uri?) {
                 }
             }.getOrNull()
         }
+        value = loaded
     }
     Box(
         Modifier
